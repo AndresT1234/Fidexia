@@ -54,6 +54,8 @@ const App = () => {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   type ProjectSummary = {
     title: string;
     sector: string;
@@ -1370,40 +1372,107 @@ const App = () => {
   };
 
   const LandingPage = () => (
+    
     <div className="min-h-screen bg-white">
       <header className="fixed top-0 w-full bg-white/95 backdrop-blur-sm shadow-sm z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <div
-              className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold"
-              style={{ backgroundColor: colors.primary }}
-            >
-              F
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
+          <div className="flex justify-between items-center">
+            {/* Logo */}
+            <div className="flex items-center gap-2">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center text-white font-bold" style={{backgroundColor: colors.primary}}>
+                F
+              </div>
+              <span className="text-xl sm:text-2xl font-bold" style={{color: colors.primary}}>Fidexia</span>
             </div>
-            <span
-              className="text-2xl font-bold"
-              style={{ color: colors.primary }}
+
+            {/* Navigation - Desktop */}
+            <nav className="hidden md:flex items-center gap-8">
+              <button className="text-gray-600 hover:text-gray-900 transition-colors font-medium">
+                Producto
+              </button>
+              <button className="text-gray-600 hover:text-gray-900 transition-colors font-medium">
+                Soluciones
+              </button>
+              <button className="text-gray-600 hover:text-gray-900 transition-colors font-medium">
+                Recursos
+              </button>
+              <button className="text-gray-600 hover:text-gray-900 transition-colors font-medium">
+                Empresa
+              </button>
+              <button className="text-gray-600 hover:text-gray-900 transition-colors font-medium">
+                Blog
+              </button>
+            </nav>
+
+            {/* Desktop CTA Buttons */}
+            <div className="hidden sm:flex items-center gap-3">
+              <button 
+                onClick={() => setCurrentView('login')} 
+                className="px-5 py-2 rounded-lg font-medium hover:bg-gray-50 transition-all" 
+                style={{color: colors.primary}}
+              >
+                Iniciar Sesión
+              </button>
+              <button 
+                onClick={() => setCurrentView('register')} 
+                className="px-5 py-2 rounded-lg text-white font-medium hover:opacity-90 transition-all shadow-md" 
+                style={{backgroundColor: colors.primary}}
+              >
+                Registrarse
+              </button>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button 
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="sm:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
             >
-              Fidexia
-            </span>
-          </div>
-          <div className="flex gap-3">
-            <button
-              onClick={() => setCurrentView("register")}
-              className="px-6 py-2 rounded-lg font-medium hover:bg-gray-100 transition-all"
-              style={{ color: colors.primary }}
-            >
-              Registrarse
-            </button>
-            <button
-              onClick={() => setCurrentView("login")}
-              className="px-6 py-2 rounded-lg text-white font-medium hover:opacity-90 transition-all"
-              style={{ backgroundColor: colors.primary }}
-            >
-              Iniciar Sesión
+              <Menu size={24} style={{color: colors.primary}} />
             </button>
           </div>
         </div>
+
+        {/* Mobile Menu Dropdown */}
+        {isMobileMenuOpen && (
+          <>
+            <div 
+              className="fixed inset-0 bg-black/30 z-40 sm:hidden"
+              onClick={() => setIsMobileMenuOpen(false)}
+            ></div>
+            <div className="absolute top-full left-0 right-0 bg-white border-t border-gray-100 shadow-lg sm:hidden z-50">
+              <div className="px-4 py-4 space-y-3">
+                <button className="w-full text-left px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors font-medium">
+                  Producto
+                </button>
+                <button className="w-full text-left px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors font-medium">
+                  Soluciones
+                </button>
+                <button className="w-full text-left px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors font-medium">
+                  Recursos
+                </button>
+                <button className="w-full text-left px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors font-medium">
+                  Empresa
+                </button>
+                <div className="pt-3 border-t border-gray-100 space-y-2">
+                  <button 
+                    onClick={() => { setCurrentView('login'); setIsMobileMenuOpen(false); }}
+                    className="w-full px-4 py-2 rounded-lg font-medium hover:bg-gray-50 transition-all text-center" 
+                    style={{color: colors.primary}}
+                  >
+                    Iniciar Sesión
+                  </button>
+                  <button 
+                    onClick={() => { setCurrentView('register'); setIsMobileMenuOpen(false); }}
+                    className="w-full px-4 py-2 rounded-lg text-white font-medium hover:opacity-90 transition-all shadow-md" 
+                    style={{backgroundColor: colors.primary}}
+                  >
+                    Registrase
+                  </button>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       </header>
 
       <section className="pt-32 pb-20 px-4 bg-gradient-to-br from-blue-50 to-green-50">
