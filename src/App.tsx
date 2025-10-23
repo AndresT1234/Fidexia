@@ -209,13 +209,16 @@ const App = () => {
           </h2>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { name: 'María López', project: 'Agricultura Sostenible', impact: '300 familias beneficiadas', roi: '18% ROI' },
-              { name: 'Carlos Ruiz', project: 'Educación Rural', impact: '1,200 niños con acceso', roi: '15% ROI' },
-              { name: 'Ana Gómez', project: 'Energía Solar', impact: '50 comunidades iluminadas', roi: '22% ROI' }
+              { name: 'María López', avatar: <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="María López" />, project: 'Agricultura Sostenible', impact: '300 familias beneficiadas', roi: '18% ROI' },
+              { name: 'Carlos Ruiz', avatar: <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Carlos Ruiz" />, project: 'Educación Rural', impact: '1,200 niños con acceso', roi: '15% ROI' },
+              { name: 'Ana Gómez', avatar: <img src="https://randomuser.me/api/portraits/women/2.jpg" alt="Ana Gómez" />, project: 'Energía Solar', impact: '50 comunidades iluminadas', roi: '22% ROI' },
+              { name: 'Luis Martínez', avatar: <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Luis Martínez" />, project: 'Turismo Sostenible', impact: '200 empleos generados', roi: '20% ROI' },
+              { name: 'Sofía Ramírez', avatar: <img src="https://randomuser.me/api/portraits/women/3.jpg" alt="Sofía Ramírez" />, project: 'Agua Potable', impact: '5,000 personas con acceso', roi: '17% ROI' },
+              { name: 'Jorge Fernández', avatar: <img src="https://randomuser.me/api/portraits/men/3.jpg" alt="Jorge Fernández" />, project: 'Salud Comunitaria', impact: '800 consultas médicas', roi: '16% ROI' }
             ].map((story, idx) => (
               <div key={idx} className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all hover:-translate-y-1">
-                <div className="w-16 h-16 rounded-full mb-4 flex items-center justify-center text-white text-xl font-bold" style={{backgroundColor: colors.green}}>
-                  {story.name.charAt(0)}
+                <div className="w-20 h-20 rounded-full mb-4 overflow-hidden flex items-center justify-center bg-gray-100">
+                  {story.avatar}
                 </div>
                 <h3 className="text-xl font-bold mb-2" style={{color: colors.primary}}>{story.name}</h3>
                 <p className="text-gray-600 mb-4">{story.project}</p>
@@ -239,10 +242,12 @@ const App = () => {
           <h3 className="text-2xl font-bold mb-8 text-gray-700">Respaldados por</h3>
           <div className="flex flex-wrap justify-center items-center gap-12 opacity-50">
             <div className="text-3xl font-bold">BANCOLOMBIA</div>
-            <div className="text-3xl font-bold">INNPULSA</div>
             <div className="text-3xl font-bold">SENA</div>
-            <div className="text-3xl font-bold">RUTA N</div>
-          </div>
+            <div className="text-3xl font-bold">FONDO EMPRENDER</div>
+            <div className="text-3xl font-bold">CORPOEMPRENDE</div>
+            <div className="text-3xl font-bold">ALCALDÍA DE MEDELLÍN</div>
+            <div className="text-3xl font-bold">GOBERNACIÓN DE ANTIOQUIA</div>
+            </div>
         </div>
       </section>
 
@@ -643,30 +648,71 @@ const App = () => {
   // --- VISTA: CENTRO DE APRENDIZAJE ---
   // (Esta vista es compartida por ambos tipos de usuario)
   const LearningCenter = () => {
-    const courses = [
-      { title: 'Finanzas para Emprendedores', duration: '4h', level: 'Intermedio', progress: 0, lessons: 12 },
-      { title: 'Pitch Efectivo', duration: '2h', level: 'Básico', progress: 60, lessons: 8 },
-      { title: 'Medición de Impacto Social', duration: '3h', level: 'Avanzado', progress: 100, lessons: 10 },
-      { title: 'Marketing Digital', duration: '5h', level: 'Intermedio', progress: 0, lessons: 15 },
-      { title: 'Liderazgo y Equipos', duration: '3h', level: 'Básico', progress: 0, lessons: 9 },
-      { title: 'Sostenibilidad Empresarial', duration: '4h', level: 'Avanzado', progress: 30, lessons: 11 }
+    // Role-specific course catalogs
+    const investorCourses = [
+        { title: 'Due Diligence para Inversores', duration: '3h', level: 'Intermedio', progress: 0, lessons: 8 },
+        { title: 'Estructuración de Portafolios de Impacto', duration: '4h', level: 'Avanzado', progress: 20, lessons: 10 },
+        { title: 'Análisis de Riesgo y Retorno', duration: '2.5h', level: 'Intermedio', progress: 0, lessons: 6 },
+        { title: 'Métricas de Impacto para Inversores', duration: '3h', level: 'Básico', progress: 50, lessons: 7 },
+        { title: 'Tendencias en Inversión de Impacto', duration: '2h', level: 'Básico', progress: 100, lessons: 5 },
+        { title: 'Evaluación de Proyectos Sociales', duration: '3.5h', level: 'Avanzado', progress: 0, lessons: 9 }
     ];
+
+    const entrepreneurCourses = [
+        { title: 'Validación de Mercado para Emprendedores', duration: '3h', level: 'Básico', progress: 0, lessons: 9 },
+        { title: 'Modelo de Negocio y Proyección Financiera', duration: '4h', level: 'Intermedio', progress: 30, lessons: 12 },
+        { title: 'Cómo Preparar un Pitch para Inversores', duration: '2h', level: 'Básico', progress: 60, lessons: 5 },
+        { title: 'Medición de Impacto Social (Emprendedores)', duration: '3h', level: 'Intermedio', progress: 0, lessons: 8 },
+        { title: 'Estrategias de Crecimiento Sostenible', duration: '2.5h', level: 'Avanzado', progress: 100, lessons: 6 },
+        { title: 'Acceso a Financiamiento para Emprendedores', duration: '3.5h', level: 'Intermedio', progress: 0, lessons: 10 }
+    ];
+
+    // If userType is not set, let them pick which learning path they want to see
+    const [localRole, setLocalRole] = useState<'investor' | 'entrepreneur' | 'all'>(userType || 'all');
+
+    const selectedRole = userType || localRole;
+
+    const courses = selectedRole === 'investor' ? investorCourses
+      : selectedRole === 'entrepreneur' ? entrepreneurCourses
+      : [...investorCourses, ...entrepreneurCourses];
 
     return (
       <div className="min-h-screen" style={{backgroundColor: colors.background}}>
         <DashboardHeader type={userType} />
         
         <div className="max-w-7xl mx-auto px-4 py-8">
-          <button
-            onClick={() => setCurrentView(userType === 'investor' ? 'investor-dashboard' : 'entrepreneur-dashboard')}
-            className="mb-6 text-gray-600 hover:text-gray-900 flex items-center gap-2"
-          >
-            ← Volver al dashboard
-          </button>
+          <div className="mb-6 flex items-center justify-between">
+            <div>
+              <h1 className="text-4xl font-bold mb-1" style={{color: colors.primary}}>Centro de Aprendizaje</h1>
+              <p className="text-gray-600">Cursos curados según tu perfil para maximizar impacto y retorno</p>
+            </div>
 
-          <div className="mb-8">
-            <h1 className="text-4xl font-bold mb-3" style={{color: colors.primary}}>Centro de Aprendizaje</h1>
-            <p className="text-gray-600">Desarrolla las habilidades clave para tomar las mejores decisiones</p>
+            {/* Role selector when userType is not fixed */}
+            {!userType && (
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setLocalRole('all')}
+                  className={`px-3 py-2 rounded-lg font-medium ${localRole === 'all' ? 'bg-white shadow-md' : 'bg-white/60'}`}
+                  style={{border: '2px solid #E5E7EB'}}
+                >
+                  Todos
+                </button>
+                <button
+                  onClick={() => setLocalRole('investor')}
+                  className={`px-3 py-2 rounded-lg font-medium ${localRole === 'investor' ? 'bg-white shadow-md' : 'bg-white/60'}`}
+                  style={{border: '2px solid #E5E7EB', color: colors.primary}}
+                >
+                  Inversor
+                </button>
+                <button
+                  onClick={() => setLocalRole('entrepreneur')}
+                  className={`px-3 py-2 rounded-lg font-medium ${localRole === 'entrepreneur' ? 'bg-white shadow-md' : 'bg-white/60'}`}
+                  style={{border: '2px solid #E5E7EB', color: colors.green}}
+                >
+                  Emprendedor
+                </button>
+              </div>
+            )}
           </div>
 
           {/* Filtros */}
@@ -686,7 +732,7 @@ const App = () => {
           <div className="grid md:grid-cols-3 gap-6">
             {courses.map((course, idx) => (
               <div
-                key={idx}
+                key={`${selectedRole}-${idx}`}
                 className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all cursor-pointer group"
               >
                 <div className="h-32 bg-gradient-to-br flex items-center justify-center" style={{background: `linear-gradient(135deg, ${colors.primary}, ${colors.green})`}}>
@@ -718,7 +764,7 @@ const App = () => {
                     </div>
                   )}
                   
-                  {/* Botones de acción (completados desde tu código) */}
+                  {/* Botones de acción */}
                   {course.progress === 100 && (
                     <button className="w-full mt-4 py-2 border-2 rounded-lg font-semibold hover:bg-gray-50 transition-all" style={{borderColor: colors.green, color: colors.green}}>
                       Descargar Certificado
@@ -748,7 +794,9 @@ const App = () => {
     const opportunities = [
       { title: 'Agua Limpia Andina', sector: 'Agua', roi: '14%', goal: 80000, raised: 30000 },
       { title: 'EduTech Para Todos', sector: 'Educación', roi: '18%', goal: 120000, raised: 95000 },
-      { title: 'Reciclaje Urbano', sector: 'Medio Ambiente', roi: '16%', goal: 50000, raised: 10000 }
+      { title: 'Reciclaje Urbano', sector: 'Medio Ambiente', roi: '16%', goal: 50000, raised: 10000 },
+      { title: 'Energía Solar Comunitaria', sector: 'Energía', roi: '12%', goal: 150000, raised: 60000 },
+      { title: 'Salud Móvil Rural', sector: 'Salud', roi: '20%', goal: 90000, raised: 45000 }
     ];
 
     return (
@@ -823,7 +871,9 @@ const App = () => {
       { title: 'Agricultura Sostenible', status: 'Activo', amount: 25000, roi: 18, impact: '300 familias' },
       { title: 'Educación Rural', status: 'Activo', amount: 40000, roi: 15, impact: '1,200 niños' },
       { title: 'Energía Solar', status: 'Completado', amount: 15000, roi: 22, impact: '50 comunidades' },
-      { title: 'App Salud Mental', status: 'Activo', amount: 40500, roi: 12, impact: '10,000 usuarios' }
+      { title: 'App Salud Mental', status: 'Activo', amount: 40500, roi: 12, impact: '10,000 usuarios' },
+      { title: 'Reciclaje Urbano', status: 'Completado', amount: 20000, roi: 16, impact: '5 toneladas de residuos' },
+      { title: 'Agua Limpia Andina', status: 'Activo', amount: 20000, roi: 14, impact: '2,000 personas' }
     ];
 
     return (
