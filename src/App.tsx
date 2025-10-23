@@ -1371,6 +1371,148 @@ const App = () => {
     );
   };
 
+// --- VISTA: EXPLORAR PROYECTOS ---
+const ProjectsView = () => {
+  const featuredProjects = [
+
+    {
+      title: "Educación Rural",
+      description: "Apoya el acceso a la educación en zonas apartadas del país.",
+      roi: "15%",
+      goal: "$80,000",
+      raised: "$62,000",
+      image: "https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=800&q=60",
+    },
+    {
+      title: "Energía Solar Comunitaria",
+      description: "Lleva energía limpia y asequible a comunidades rurales.",
+      roi: "22%",
+      goal: "$120,000",
+      raised: "$95,000",
+      image: "https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=800&q=60",
+    },
+    
+    {
+      title: "Tecnología para la Inclusión",
+      description: "Desarrolla soluciones tecnológicas que promueven la inclusión social.",
+      roi: "25%",
+      goal: "$110,000",
+      raised: "$85,000",
+      image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=60",
+    },
+    {
+      title: "Innovación Agrícola",
+      description: "Fomenta el uso de tecnología en el sector agrícola para mejorar la productividad.",
+      roi: "30%",
+      goal: "$130,000",
+      raised: "$100,000",
+      image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=60",
+    },
+  ];
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <header className="fixed top-0 w-full bg-white/95 backdrop-blur-sm shadow-sm z-50">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex justify-between items-center">
+    {/* Logo */}
+    <div
+      onClick={() => setCurrentView("landing")}
+      className="flex items-center gap-2 cursor-pointer"
+    >
+      <div
+        className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center text-white font-bold"
+        style={{ backgroundColor: colors.primary }}
+      >
+        F
+      </div>
+      <span
+        className="text-xl sm:text-2xl font-bold"
+        style={{ color: colors.primary }}
+      >
+        Fidexia
+      </span>
+    </div>
+
+    {/* Botones de acción */}
+    <div className="flex items-center gap-3">
+      <button
+        onClick={() => setCurrentView("landing")}
+        className="px-5 py-2 rounded-lg font-medium border border-blue-700 text-blue-700 hover:bg-blue-50 transition-all"
+      >
+        Regresar
+      </button>
+      <button
+        onClick={() => setCurrentView("register")}
+        className="px-5 py-2 rounded-lg text-white font-medium hover:opacity-90 transition-all shadow-md"
+        style={{ backgroundColor: colors.primary }}
+      >
+        Crear Cuenta
+      </button>
+    </div>
+  </div>
+</header>
+
+
+      <main className="pt-28 pb-20 px-4">
+        <div className="max-w-7xl mx-auto text-center mb-16">
+          <h1
+            className="text-4xl sm:text-5xl font-bold mb-4"
+            style={{ color: colors.primary }}
+          >
+            Explora Proyectos de Impacto
+          </h1>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Invierte en iniciativas que generan retorno financiero y transforman comunidades.
+          </p>
+        </div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          {featuredProjects.map((p, i) => (
+            <div
+              key={i}
+              className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 overflow-hidden"
+            >
+              <img src={p.image} alt={p.title} className="w-full h-48 object-cover" />
+              <div className="p-6 text-left">
+                <h3
+                  className="text-xl font-bold mb-2"
+                  style={{ color: colors.primary }}
+                >
+                  {p.title}
+                </h3>
+                <p className="text-gray-600 mb-4">{p.description}</p>
+                <div className="flex justify-between text-sm text-gray-500 mb-4">
+                  <span>Meta: {p.goal}</span>
+                  <span>Recaudado: {p.raised}</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span
+                    className="font-semibold"
+                    style={{ color: colors.green }}
+                  >
+                    ROI {p.roi}
+                  </span>
+                  <button
+                    className="px-4 py-2 rounded-lg text-white font-semibold hover:opacity-90 transition-all"
+                    style={{ backgroundColor: colors.primary }}
+                  >
+                    Ver Detalles
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </main>
+
+      <footer className="py-8 text-center text-gray-500 border-t mt-12">
+        © 2025 Fidexia. Inversión con propósito.
+      </footer>
+    </div>
+  );
+};
+
+
 const LandingPage = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -3860,6 +4002,8 @@ const LandingPage = () => {
     switch (currentView) {
       case "landing":
         return <LandingPage />;
+      case "projects":
+        return <ProjectsView />;
       case "register": // Agregar este caso si no existe
         return <RegisterPage />;
       case "login":
