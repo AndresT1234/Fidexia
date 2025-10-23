@@ -95,40 +95,126 @@ const App = () => {
     { id: 5, message: "Completa tu perfil", time: "2 días", read: true },
   ];
 
-  const NotificationsDropdown = () => (
-    <div className="absolute right-0 top-full mt-2 w-96 bg-white rounded-xl shadow-2xl border border-gray-100 z-50">
-      <div className="p-4 border-b border-gray-100 flex justify-between items-center">
-        <h3 className="font-bold text-lg" style={{ color: colors.primary }}>
-          Notificaciones
-        </h3>
-        <button className="text-sm text-blue-600 hover:underline">
-          Marcar todas
-        </button>
+  const NotificationsDropdown = () => {
+  const notificationsList = [
+    { 
+      id: 1, 
+      type: 'opportunity',
+      message: 'Nueva oportunidad: Agricultura Sostenible coincide con tus intereses', 
+      time: '5 min', 
+      read: false,
+      action: 'Ver Proyecto',
+      actionView: 'project-detail'
+    },
+    { 
+      id: 2, 
+      type: 'message',
+      message: 'Tienes un nuevo mensaje de Juan Pérez', 
+      time: '1 h', 
+      read: false,
+      action: 'Ver Mensaje',
+      actionView: 'messages'
+    },
+    { 
+      id: 3, 
+      type: 'success',
+      message: 'Tu proyecto "Energía Solar" fue aprobado', 
+      time: '2 h', 
+      read: false,
+      action: 'Ver Estado',
+      actionView: 'entrepreneur-dashboard'
+    },
+    { 
+      id: 4, 
+      type: 'update',
+      message: 'Actualización: Proyecto "Agua Limpia" alcanzó 50% de financiamiento', 
+      time: '1 día', 
+      read: true,
+      action: 'Ver Detalles',
+      actionView: 'investor-portfolio'
+    },
+    { 
+      id: 5, 
+      type: 'reminder',
+      message: 'Completa tu perfil para recibir mejores recomendaciones', 
+      time: '2 días', 
+      read: true,
+      action: 'Completar',
+      actionView: 'profile-settings'
+    }
+  ];
+
+  const getIcon = (type: string) => {
+    switch(type) {
+      case 'opportunity': return <Target size={18} style={{color: colors.green}} />;
+      case 'message': return <MessageCircle size={18} style={{color: colors.primary}} />;
+      case 'success': return <CheckCircle size={18} className="text-green-500" />;
+      case 'update': return <TrendingUp size={18} style={{color: colors.accent}} />;
+      case 'reminder': return <Bell size={18} className="text-gray-500" />;
+      default: return <Bell size={18} />;
+    }
+  };
+
+  return (
+    // CAMBIO AQUÍ: Usar fixed en móvil para cubrir toda la pantalla
+    <div className="fixed md:absolute inset-0 md:inset-auto md:right-0 md:top-full md:mt-2 md:w-96 bg-white md:rounded-xl shadow-2xl border-0 md:border md:border-gray-100 z-50 flex flex-col">
+      <div className="p-4 border-b border-gray-100 flex justify-between items-center flex-shrink-0">
+        <h3 className="font-bold text-lg" style={{color: colors.primary}}>Notificaciones</h3>
+        <div className="flex items-center gap-2">
+          <button className="text-sm text-blue-600 hover:underline hidden md:inline">
+            Marcar todas
+          </button>
+          {/* Botón cerrar solo en móvil */}
+          <button 
+            onClick={() => setShowNotifications(false)}
+            className="md:hidden p-1 hover:bg-gray-100 rounded-lg"
+          >
+            <X size={20} className="text-gray-600" />
+          </button>
+        </div>
       </div>
-      <div className="max-h-96 overflow-y-auto">
-        {notificationsList.map((notif) => (
-          <div
-            key={notif.id}
-            className={`p-4 border-b border-gray-50 hover:bg-gray-50 cursor-pointer ${
-              !notif.read ? "bg-blue-50" : ""
-            }`}
+      
+      <div className="flex-1 overflow-y-auto">
+        {notificationsList.map(notif => (
+          <div 
+            key={notif.id} 
+            className={`p-4 border-b border-gray-50 hover:bg-gray-50 transition-all ${!notif.read ? 'bg-blue-50' : ''}`}
           >
             <div className="flex gap-3">
-              <div
-                className={`w-2 h-2 rounded-full mt-2 ${
-                  !notif.read ? "bg-blue-500" : "bg-gray-300"
-                }`}
-              ></div>
-              <div className="flex-1">
-                <p className="text-sm text-gray-800">{notif.message}</p>
-                <p className="text-xs text-gray-500 mt-1">{notif.time}</p>
+              <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0">
+                {getIcon(notif.type)}
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm text-gray-800 mb-1 break-words">{notif.message}</p>
+                <div className="flex items-center justify-between gap-2 flex-wrap">
+                  <p className="text-xs text-gray-500">{notif.time}</p>
+                  {notif.action && (
+                    <button 
+                      onClick={() => {
+                        setCurrentView(notif.actionView);
+                        setShowNotifications(false);
+                      }}
+                      className="text-xs font-semibold hover:underline whitespace-nowrap"
+                      style={{color: colors.primary}}
+                    >
+                      {notif.action}
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
           </div>
         ))}
       </div>
+      
+      <div className="p-3 border-t border-gray-100 text-center flex-shrink-0">
+        <button className="text-sm font-semibold hover:underline" style={{color: colors.primary}}>
+          Ver todas las notificaciones
+        </button>
+      </div>
     </div>
   );
+};
 
   const DashboardHeader: React.FC<{
     type: "investor" | "entrepreneur" | null | undefined;
