@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: fidexia
+    env: node
+    buildCommand: "npm install && npx vite build"
+    startCommand: "npx vite preview"
+    publishDirectory: "dist"
+    envVars:
+      - key: NODE_VERSION
+        value: 22.16.0
