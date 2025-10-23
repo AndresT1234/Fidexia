@@ -1371,8 +1371,10 @@ const App = () => {
     );
   };
 
-  const LandingPage = () => (
-    
+const LandingPage = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  return (
     <div className="min-h-screen bg-white">
       <header className="fixed top-0 w-full bg-white/95 backdrop-blur-sm shadow-sm z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
@@ -1399,9 +1401,6 @@ const App = () => {
               <button className="text-gray-600 hover:text-gray-900 transition-colors font-medium">
                 Empresa
               </button>
-              <button className="text-gray-600 hover:text-gray-900 transition-colors font-medium">
-                Blog
-              </button>
             </nav>
 
             {/* Desktop CTA Buttons */}
@@ -1418,7 +1417,7 @@ const App = () => {
                 className="px-5 py-2 rounded-lg text-white font-medium hover:opacity-90 transition-all shadow-md" 
                 style={{backgroundColor: colors.primary}}
               >
-                Registrarse
+                Comenzar
               </button>
             </div>
 
@@ -1439,7 +1438,7 @@ const App = () => {
               className="fixed inset-0 bg-black/30 z-40 sm:hidden"
               onClick={() => setIsMobileMenuOpen(false)}
             ></div>
-            <div className="absolute top-full left-0 right-0 bg-white border-t border-gray-100 shadow-lg sm:hidden z-50">
+            <div className="absolute top-full left-0 right-0 bg-white border-t border-gray-100 shadow-lg sm:hidden z-50  ">
               <div className="px-4 py-4 space-y-3">
                 <button className="w-full text-left px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors font-medium">
                   Producto
@@ -1466,7 +1465,7 @@ const App = () => {
                     className="w-full px-4 py-2 rounded-lg text-white font-medium hover:opacity-90 transition-all shadow-md" 
                     style={{backgroundColor: colors.primary}}
                   >
-                    Registrase
+                    Comenzar
                   </button>
                 </div>
               </div>
@@ -1475,187 +1474,155 @@ const App = () => {
         )}
       </header>
 
-      <section className="pt-32 pb-20 px-4 bg-gradient-to-br from-blue-50 to-green-50">
-        <div className="max-w-7xl mx-auto text-center">
-          <h1
-            className="text-5xl md:text-6xl font-bold mb-6"
-            style={{ color: colors.primary }}
-          >
-            Inversión con Propósito,
-            <br />
-            <span style={{ color: colors.green }}>Impacto con Retorno</span>
-          </h1>
-          <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
-            Conecta a emprendedores sociales con inversionistas que buscan
-            rentabilidad y transformación real.
-          </p>
+      {/* Hero Section - Más profesional y limpio */}
+      <section className="pt-24 sm:pt-32 pb-16 sm:pb-20 px-4 bg-gradient-to-br from-blue-50 via-white to-green-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="max-w-3xl mx-auto text-center mb-12">
+            {/* Badge opcional */}
+            
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight" style={{color: colors.primary}}>
+              Inversión con Propósito,<br />
+              <span style={{color: colors.green}}>Impacto con Retorno</span>
+            </h1>
+            
+            <p className="text-lg sm:text-xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+              Conecta a emprendedores sociales con inversionistas que buscan rentabilidad y transformación real.
+            </p>
+            
+            {/* CTA Principal único y prominente */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+              
+              <button 
+                className="w-full sm:w-auto px-8 py-4 rounded-xl font-semibold text-lg border-2 hover:bg-gray-50 transition-all flex items-center justify-center gap-2"
+                style={{borderColor: colors.primary, color: colors.primary}}
+              >
+                Ver Demo
+                <Eye size={20} />
+              </button>
+            </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-            <button
-              onClick={() => {
-                setUserType("investor");
-                setCurrentView("register");
-              }}
-              className="group px-8 py-4 rounded-xl text-white font-semibold text-lg hover:scale-105 transition-all shadow-lg flex items-center gap-2"
-              style={{ backgroundColor: colors.primary }}
-            >
-              Soy Inversor
-              <ChevronRight className="group-hover:translate-x-1 transition-transform" />
-            </button>
-            <button
-              onClick={() => {
-                setUserType("entrepreneur");
-                setCurrentView("register");
-              }}
-              className="group px-8 py-4 rounded-xl text-white font-semibold text-lg hover:scale-105 transition-all shadow-lg flex items-center gap-2"
-              style={{ backgroundColor: colors.green }}
-            >
-              Soy Emprendedor
-              <ChevronRight className="group-hover:translate-x-1 transition-transform" />
-            </button>
+            {/* Trust indicators más discretos */}
+            <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-500">
+              <div className="flex items-center gap-2">
+                <CheckCircle size={16} style={{color: colors.green}} />
+                <span>Sin comisiones ocultas</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Shield size={16} style={{color: colors.green}} />
+                <span>100% Seguro</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Users size={16} style={{color: colors.green}} />
+                <span>+10k usuarios activos</span>
+              </div>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all">
-              <div
-                className="text-4xl font-bold mb-2"
-                style={{ color: colors.green }}
-              >
-                452
-              </div>
-              <div className="text-gray-600">Proyectos Financiados</div>
+          {/* Stats Cards - Más elegantes */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto">
+            <div className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all border border-gray-100">
+              <div className="text-3xl sm:text-4xl font-bold mb-2" style={{color: colors.green}}>452</div>
+              <div className="text-gray-600 text-sm sm:text-base">Proyectos Financiados</div>
             </div>
-            <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all">
-              <div
-                className="text-4xl font-bold mb-2"
-                style={{ color: colors.primary }}
-              >
-                $28M
-              </div>
-              <div className="text-gray-600">Capital Movilizado</div>
+            <div className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all border border-gray-100">
+              <div className="text-3xl sm:text-4xl font-bold mb-2" style={{color: colors.primary}}>$28M</div>
+              <div className="text-gray-600 text-sm sm:text-base">Capital Movilizado</div>
             </div>
-            <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all">
-              <div
-                className="text-4xl font-bold mb-2"
-                style={{ color: colors.accent }}
-              >
-                89%
-              </div>
-              <div className="text-gray-600">Tasa de Éxito</div>
+            <div className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all border border-gray-100">
+              <div className="text-3xl sm:text-4xl font-bold mb-2" style={{color: colors.accent}}>89%</div>
+              <div className="text-gray-600 text-sm sm:text-base">Tasa de Éxito</div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Sección Historias de Impacto */}
-      <section
-        className="py-20 px-4"
-        style={{ backgroundColor: colors.background }}
-      >
+      {/* Sección de Beneficios - Más limpia */}
+      <section className="py-16 sm:py-20 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
-          <h2
-            className="text-4xl font-bold text-center mb-12"
-            style={{ color: colors.primary }}
-          >
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4" style={{color: colors.primary}}>
+              ¿Por qué elegir Fidexia?
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Unimos tecnología, transparencia y propósito para crear un ecosistema de inversión de impacto
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                icon: <Target size={32} />,
+                title: 'Impacto Medible',
+                description: 'Cada inversión genera métricas claras de impacto social y ambiental verificables.'
+              },
+              {
+                icon: <TrendingUp size={32} />,
+                title: 'Retornos Competitivos',
+                description: 'ROI promedio del 15-20% anual con proyectos validados por nuestro equipo.'
+              },
+              {
+                icon: <Shield size={32} />,
+                title: 'Total Transparencia',
+                description: 'Seguimiento en tiempo real de tus inversiones con reportes periódicos detallados.'
+              },
+              {
+                icon: <Users size={32} />,
+                title: 'Comunidad Activa',
+                description: 'Conecta con emprendedores e inversores comprometidos con el cambio.'
+              },
+              {
+                icon: <Award size={32} />,
+                title: 'Due Diligence Riguroso',
+                description: 'Cada proyecto pasa por un proceso exhaustivo de validación antes de publicarse.'
+              },
+              {
+                icon: <BarChart3 size={32} />,
+                title: 'Portafolio Diversificado',
+                description: 'Accede a proyectos en múltiples sectores: agricultura, educación, energía y más.'
+              }
+            ].map((benefit, idx) => (
+              <div key={idx} className="group p-6 rounded-2xl border-2 border-gray-100 hover:border-green-300 transition-all hover:shadow-lg">
+                <div className="w-14 h-14 rounded-xl mb-4 flex items-center justify-center group-hover:scale-110 transition-transform" style={{backgroundColor: colors.background, color: colors.primary}}>
+                  {benefit.icon}
+                </div>
+                <h3 className="text-xl font-bold mb-3" style={{color: colors.primary}}>
+                  {benefit.title}
+                </h3>
+                <p className="text-gray-600">
+                  {benefit.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+       {/* Sección Historias de Impacto */}
+      <section className="py-20 px-4" style={{backgroundColor: colors.background}}>
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-12" style={{color: colors.primary}}>
             Historias de Impacto Real
           </h2>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              {
-                name: "María López",
-                avatar: (
-                  <img
-                    src="https://randomuser.me/api/portraits/women/1.jpg"
-                    alt="María López"
-                  />
-                ),
-                project: "Agricultura Sostenible",
-                impact: "300 familias beneficiadas",
-                roi: "18% ROI",
-              },
-              {
-                name: "Carlos Ruiz",
-                avatar: (
-                  <img
-                    src="https://randomuser.me/api/portraits/men/1.jpg"
-                    alt="Carlos Ruiz"
-                  />
-                ),
-                project: "Educación Rural",
-                impact: "1,200 niños con acceso",
-                roi: "15% ROI",
-              },
-              {
-                name: "Ana Gómez",
-                avatar: (
-                  <img
-                    src="https://randomuser.me/api/portraits/women/2.jpg"
-                    alt="Ana Gómez"
-                  />
-                ),
-                project: "Energía Solar",
-                impact: "50 comunidades iluminadas",
-                roi: "22% ROI",
-              },
-              {
-                name: "Luis Martínez",
-                avatar: (
-                  <img
-                    src="https://randomuser.me/api/portraits/men/2.jpg"
-                    alt="Luis Martínez"
-                  />
-                ),
-                project: "Turismo Sostenible",
-                impact: "200 empleos generados",
-                roi: "20% ROI",
-              },
-              {
-                name: "Sofía Ramírez",
-                avatar: (
-                  <img
-                    src="https://randomuser.me/api/portraits/women/3.jpg"
-                    alt="Sofía Ramírez"
-                  />
-                ),
-                project: "Agua Potable",
-                impact: "5,000 personas con acceso",
-                roi: "17% ROI",
-              },
-              {
-                name: "Jorge Fernández",
-                avatar: (
-                  <img
-                    src="https://randomuser.me/api/portraits/men/3.jpg"
-                    alt="Jorge Fernández"
-                  />
-                ),
-                project: "Salud Comunitaria",
-                impact: "800 consultas médicas",
-                roi: "16% ROI",
-              },
+              { name: 'María López', avatar: <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="María López" />, project: 'Agricultura Sostenible', impact: '300 familias beneficiadas', roi: '18% ROI' },
+              { name: 'Carlos Ruiz', avatar: <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Carlos Ruiz" />, project: 'Educación Rural', impact: '1,200 niños con acceso', roi: '15% ROI' },
+              { name: 'Ana Gómez', avatar: <img src="https://randomuser.me/api/portraits/women/2.jpg" alt="Ana Gómez" />, project: 'Energía Solar', impact: '50 comunidades iluminadas', roi: '22% ROI' },
+              { name: 'Luis Martínez', avatar: <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Luis Martínez" />, project: 'Turismo Sostenible', impact: '200 empleos generados', roi: '20% ROI' },
+              { name: 'Sofía Ramírez', avatar: <img src="https://randomuser.me/api/portraits/women/3.jpg" alt="Sofía Ramírez" />, project: 'Agua Potable', impact: '5,000 personas con acceso', roi: '17% ROI' },
+              { name: 'Jorge Fernández', avatar: <img src="https://randomuser.me/api/portraits/men/3.jpg" alt="Jorge Fernández" />, project: 'Salud Comunitaria', impact: '800 consultas médicas', roi: '16% ROI' }
             ].map((story, idx) => (
-              <div
-                key={idx}
-                className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all hover:-translate-y-1"
-              >
+              <div key={idx} className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all hover:-translate-y-1">
                 <div className="w-20 h-20 rounded-full mb-4 overflow-hidden flex items-center justify-center bg-gray-100">
                   {story.avatar}
                 </div>
-                <h3
-                  className="text-xl font-bold mb-2"
-                  style={{ color: colors.primary }}
-                >
-                  {story.name}
-                </h3>
+                <h3 className="text-xl font-bold mb-2" style={{color: colors.primary}}>{story.name}</h3>
                 <p className="text-gray-600 mb-4">{story.project}</p>
                 <div className="flex items-center gap-2 text-sm text-gray-500 mb-2">
                   <Users size={16} />
                   {story.impact}
                 </div>
-                <div
-                  className="flex items-center gap-2 text-sm font-semibold"
-                  style={{ color: colors.green }}
-                >
+                <div className="flex items-center gap-2 text-sm font-semibold" style={{color: colors.green}}>
                   <TrendingUp size={16} />
                   {story.roi}
                 </div>
@@ -1663,26 +1630,110 @@ const App = () => {
             ))}
           </div>
         </div>
+    </section>
+
+      {/* CTA Final */}
+      <section className="py-16 sm:py-20 px-4 bg-gradient-to-br from-blue-700 to-green-700 text-white">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+            Comienza a invertir con propósito hoy
+          </h2>
+          <p className="text-lg sm:text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+            Únete a miles de inversores y emprendedores que están creando un impacto real
+          </p>
+          
+          <button 
+            onClick={() => setCurrentView('projects')}
+            className="px-10 py-4 rounded-xl bg-white font-bold text-lg hover:scale-105 transition-all shadow-xl inline-flex items-center gap-2"
+            style={{color: colors.primary}}
+          >
+            Explorar Proyectos
+            <ArrowRight size={24} />
+          </button>
+
+          <div className="text-center mt-12">
+  
+</div>
+
+
+
+        </div>
       </section>
 
-      <footer
-        className="py-12 px-4 text-white"
-        style={{ backgroundColor: colors.primary }}
-      >
-        <div className="max-w-7xl mx-auto text-center">
-          <div className="text-2xl font-bold mb-4">Fidexia</div>
-          <p className="text-blue-200 mb-6">
-            Inversión con propósito, impacto con retorno
-          </p>
-          <div className="flex justify-center gap-6">
-            <Twitter size={24} className="cursor-pointer hover:opacity-80" />
-            <Linkedin size={24} className="cursor-pointer hover:opacity-80" />
-            <Facebook size={24} className="cursor-pointer hover:opacity-80" />
-          </div>
+      {/* Footer mejorado */}
+      {/* Footer Profesional y Centrado */}
+<footer className="py-16 px-6 bg-gray-900 text-white">
+  <div className="max-w-7xl mx-auto flex flex-col items-center text-center">
+    
+    {/* Secciones principales */}
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 mb-12 w-full">
+      <div>
+        <h4 className="font-semibold mb-4 text-lg">Producto</h4>
+        <ul className="space-y-2 text-sm text-gray-400">
+          <li><button className="hover:text-white transition-colors">Cómo Funciona</button></li>
+          <li><button className="hover:text-white transition-colors">Para Inversores</button></li>
+          <li><button className="hover:text-white transition-colors">Para Emprendedores</button></li>
+          <li><button className="hover:text-white transition-colors">Precios</button></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 className="font-semibold mb-4 text-lg">Recursos</h4>
+        <ul className="space-y-2 text-sm text-gray-400">
+          <li><button className="hover:text-white transition-colors">Blog</button></li>
+          <li><button className="hover:text-white transition-colors">Guías</button></li>
+          <li><button className="hover:text-white transition-colors">Centro de Ayuda</button></li>
+          <li><button className="hover:text-white transition-colors">API</button></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 className="font-semibold mb-4 text-lg">Empresa</h4>
+        <ul className="space-y-2 text-sm text-gray-400">
+          <li><button className="hover:text-white transition-colors">Sobre Nosotros</button></li>
+          <li><button className="hover:text-white transition-colors">Carreras</button></li>
+          <li><button className="hover:text-white transition-colors">Prensa</button></li>
+          <li><button className="hover:text-white transition-colors">Contacto</button></li>
+        </ul>
+      </div>
+    </div>
+
+    {/* Frase + redes sociales */}
+    <div className="mb-10">
+      <p className="text-gray-400 mb-5 text-sm italic">
+        Inversión con propósito, impacto con retorno
+      </p>
+      <div className="flex gap-4 justify-center">
+        <button className="w-10 h-10 rounded-lg bg-white/10 hover:bg-white/20 transition-all flex items-center justify-center">
+          <Twitter size={18} />
+        </button>
+        <button className="w-10 h-10 rounded-lg bg-white/10 hover:bg-white/20 transition-all flex items-center justify-center">
+          <Linkedin size={18} />
+        </button>
+        <button className="w-10 h-10 rounded-lg bg-white/10 hover:bg-white/20 transition-all flex items-center justify-center">
+          <Facebook size={18} />
+        </button>
+      </div>
+    </div>
+
+    {/* Línea inferior */}
+    <div className="border-t border-gray-800 w-full pt-6">
+      <div className="flex flex-col sm:flex-row justify-between items-center text-sm text-gray-400 gap-4">
+        <div>© 2025 Fidexia. Todos los derechos reservados.</div>
+        <div className="flex gap-6">
+          <button className="hover:text-white transition-colors">Términos</button>
+          <button className="hover:text-white transition-colors">Privacidad</button>
+          <button className="hover:text-white transition-colors">Cookies</button>
         </div>
-      </footer>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
     </div>
   );
+};
 
   // --- VISTA: REGISTRO ---
   const RegisterPage = () => {
