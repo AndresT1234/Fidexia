@@ -2070,8 +2070,8 @@ const RegisterPage = () => {
   const [activeTab, setActiveTab] = useState(userType || "investor");
 
   return (
-    <div className="h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-green-50 overflow-hidden px-4">
-      <div className="relative bg-white rounded-3xl shadow-2xl w-full max-w-md p-8 md:p-10 transition-all duration-300">
+    <div className="h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-green-50 px-4 overflow-auto">
+      <div className="relative bg-white rounded-3xl shadow-2xl w-full max-w-md p-8 md:p-10 transition-all duration-300 my-10">
         
         {/* HEADER SUPERIOR */}
         <div className="absolute top-6 left-6 right-6 flex items-center justify-between">
@@ -2240,6 +2240,7 @@ const RegisterPage = () => {
     </div>
   );
 };
+
 
 
 
@@ -3559,7 +3560,6 @@ const RegisterPage = () => {
 
         <div className="max-w-7xl mx-auto px-4 py-8">
           
-
           <div className="mb-8">
             <h1
               className="text-4xl font-bold mb-3"
